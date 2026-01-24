@@ -11,10 +11,23 @@ struct ContentView: View {
     
     let predators = Predators()
     
+    @State private var searchText: String = ""
+    
+    var filteredDinos: [ApexPredatorModel] {
+        if searchText.isEmpty {
+            return predators.apexPredators
+        }
+        else {
+            return predators.apexPredators.filter { predator in
+                predator.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             
-            List(predators.apexPredators) { predator in
+            List(filteredDinos) { predator in
                 NavigationLink {
                     Image(predator.image)
                         .resizable()
@@ -47,6 +60,9 @@ struct ContentView: View {
                 }
             }
             .navigationTitle(Text("Apex Predators"))
+            .searchable(text: $searchText)
+            .autocorrectionDisabled()
+            .animation(.default, value: searchText)
         }
         .preferredColorScheme(.dark)
     }
