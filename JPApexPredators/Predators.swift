@@ -9,6 +9,7 @@ import Foundation
 
 class Predators {
     
+    var allApexPredators: [ApexPredatorModel] = []
     var apexPredators: [ApexPredatorModel] = []
     
     init() {
@@ -31,7 +32,7 @@ class Predators {
     }
     
     
-    public func search(for searchTerm: String) -> [ApexPredatorModel] {
+     func search(for searchTerm: String) -> [ApexPredatorModel] {
         if searchTerm.isEmpty {
             return apexPredators
         }
@@ -42,7 +43,7 @@ class Predators {
         }
     }
     
-    public func sort(by alphabetical: Bool) {
+     func sort(by alphabetical: Bool) {
         return apexPredators.sort { predator1, predator2 in
             if alphabetical {
                 predator1.name < predator2.name
@@ -52,4 +53,6 @@ class Predators {
             }
         }
     }
+    
+    
 }
