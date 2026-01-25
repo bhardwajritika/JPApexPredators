@@ -24,7 +24,7 @@ class Predators {
                 let data = try Data(contentsOf: url)
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                apexPredators = try decoder.decode([ApexPredatorModel].self, from: data)
+                allApexPredators = try decoder.decode([ApexPredatorModel].self, from: data)
             } catch {
                 print("Error decoding JSON data: \(error)")
             }
@@ -54,5 +54,14 @@ class Predators {
         }
     }
     
-    
+    func filter (by type: apexType) {
+        if type == .all {
+            apexPredators = allApexPredators
+        }
+        else {
+            apexPredators = allApexPredators.filter {predator in
+                predator.type == type
+            }
+        }
+    }
 }

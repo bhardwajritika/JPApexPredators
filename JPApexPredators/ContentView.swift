@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var currentSelection = apexType.all
     
     var filteredDinos: [ApexPredatorModel] {
+        predators.filter(by: currentSelection)
         predators.sort(by: alphabetical)
         return predators.search(for: searchText)
     }
@@ -74,7 +75,7 @@ struct ContentView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        Picker("Filter", selection: $currentSelection) {
+                        Picker("Filter", selection: $currentSelection.animation()) {
                             ForEach (apexType.allCases) {
                                 type in
                                 Label(type.rawValue.capitalized, systemImage: type.icon)
