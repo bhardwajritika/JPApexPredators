@@ -14,6 +14,7 @@ struct ApexPredatorModel : Decodable, Identifiable {
     let type : apexType
     let latitude : Double
     let longitude : Double
+    let movies: [String]
     let movieScenes : [movieScene]
     let link : String
     
@@ -21,7 +22,7 @@ struct ApexPredatorModel : Decodable, Identifiable {
         name.lowercased().replacingOccurrences(of: " ", with: "")
     }
     
-    struct movieScene : Decodable {
+    struct movieScene : Decodable, Identifiable {
         let id : Int
         let movie : String
         let sceneDescription : String
