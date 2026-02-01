@@ -53,9 +53,12 @@ struct PredatorDetail: View {
                     
                     // current location
                     NavigationLink {
-                        Image(predator.image)
-                            .resizable()
-                            .scaledToFit( )
+                        PredatorMap(position: .camera(MapCamera(
+                            centerCoordinate: predator.location,
+                            distance: 1000,
+                            heading: 250,
+                            pitch: 80))
+                        )
                     } label: {
                         Map(position: $position) {
                             Annotation(predator.name, coordinate: predator.location){
@@ -128,7 +131,7 @@ struct PredatorDetail: View {
 }
 
 #Preview {
-    let predator = Predators().allApexPredators[7]
+    let predator = Predators().allApexPredators[2]
     
     NavigationStack {
         PredatorDetail(predator: predator, position: .camera(
