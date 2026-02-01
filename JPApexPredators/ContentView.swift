@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
     
@@ -29,7 +30,10 @@ struct ContentView: View {
 //                    Image(predator.image)
 //                        .resizable()
 //                        .scaledToFit()
-                    PredatorDetail(predator: predator)
+                    PredatorDetail(predator: predator, position: .camera(
+                        MapCamera(centerCoordinate: predator.location,
+                                  distance: 30000
+                                 )))
                 } label: {
                     HStack {
                         // Image
